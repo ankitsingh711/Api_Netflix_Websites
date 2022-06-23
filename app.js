@@ -30,16 +30,34 @@ app.get('/webseries',(req,res) => {
     })
 })
 
-// webseries on the basis of Category
 
 
 
+// play webseries
 
-
-app.get('/webseries/:id',(req,res) => {
+app.get('/playweb/:id',(req,res) => {
     let WebId = Number(req.params.id);
-    // let WebId = mongo.ObjectId(req.params.id)
     db.collection('webseries').find({webseries_id:WebId}).toArray((err,result) => {
+        if(err) throw err;
+        res.send(result)
+    })
+})
+
+// play movies
+
+app.get('/playmovie/:id',(req,res) => {
+    let MovieId = Number(req.params.id);
+    db.collection('movies').find({movie_id:MovieId}).toArray((err,result) => {
+        if(err) throw err;
+        res.send(result)
+    })
+})
+
+// play Tvshows
+
+app.get('/playtv/:id',(req,res) => {
+    let TvId = (req.params.id);
+    db.collection('tvshows').find({tvshows_id:TvId}).toArray((err,result) => {
         if(err) throw err;
         res.send(result)
     })
