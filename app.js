@@ -63,6 +63,20 @@ app.get('/playtv/:id',(req,res) => {
     })
 })
 
+// movies on the basis of id
+
+app.post('/addMovie',(req,res) => {
+    console.log(req.body);
+    if(Array.isArray(req.body)){
+        db.collection('movies').find({movie_id:{$in:req.body}}).toArray((err,result)=>{
+            if (err) throw err;
+            res.send(result)
+        })
+    }else{
+        res.send('Invalid Input')
+    }
+})
+
 
 
 //premium list
